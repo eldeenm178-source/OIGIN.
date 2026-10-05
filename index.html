@@ -101,6 +101,12 @@ html[dir="ltr"] #menu .m-links a:hover{padding-right:0;padding-left:12px}
 .hero-min .kicker{font-size:12px;letter-spacing:.35em;text-indent:.35em;color:var(--beige);border:1px solid var(--line-w);padding:9px 18px;border-radius:100px;background:rgba(255,255,255,.04)}
 .hero-min h1{font-size:clamp(13px,2.6vw,15px);letter-spacing:.35em;text-indent:.35em;color:var(--muted-w);margin-top:22px;font-weight:400}
 .scroll-hint{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted-w);font-size:12px;letter-spacing:.25em}
+.story-music{margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid var(--line-w);border-radius:100px;background:rgba(255,255,255,.05);color:var(--paper);font-size:13px;font-weight:600;font-family:inherit;transition:.3s var(--ease)}
+.story-music:hover,.story-music.playing{background:rgba(255,255,255,.12)}
+.story-music svg{width:15px;height:15px;fill:currentColor}
+.story-music .pause-icon{display:none}
+.story-music.playing .play-icon{display:none}
+.story-music.playing .pause-icon{display:block}
 .mouse{width:26px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:20px;position:relative}
 .mouse::after{content:'';position:absolute;top:8px;left:50%;width:3px;height:8px;background:var(--beige);border-radius:10px;transform:translateX(-50%);animation:wheel 1.8s infinite}
 @keyframes wheel{0%{opacity:1;top:8px}50%{opacity:0;top:18px}100%{opacity:1;top:8px}}
@@ -336,6 +342,7 @@ html[dir="ltr"] .sheet-close{left:auto;right:14px}
 
 <main id="top">
 <div class="story-wrap" id="story">
+<audio id="storyMusic" src="assets/music/story.mp3" preload="none" loop></audio>
 <div class="glow" style="top:5%;right:-10%"></div>
 <div class="glow" style="top:55%;left:-15%;opacity:.1"></div>
 
@@ -343,6 +350,11 @@ html[dir="ltr"] .sheet-close{left:auto;right:14px}
 <div class="kicker" data-ar="ORIGIN — الحكاية من الأول" data-en="ORIGIN — THE STORY FROM ZERO">ORIGIN — الحكاية من الأول</div>
 <h1 data-ar="اسكرول وخلي الحكاية تتحكي" data-en="SCROLL LET THE STORY UNFOLD">اسكرول وخلي الحكاية تتحكي</h1>
 <div class="scroll-hint"><div class="mouse"></div><span data-ar="اسحب لتحت" data-en="SCROLL DOWN">اسحب لتحت</span></div>
+<button class="story-music" id="storyMusicBtn" type="button" aria-label="شغل الموسيقى" aria-pressed="false">
+<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>
+<svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+<span id="storyMusicLabel">شغل الموسيقى</span>
+</button>
 </section>
 
 <!-- CHAPTER 1 -->
@@ -535,9 +547,33 @@ el.placeholder=(l==='ar'?el.getAttribute('data-ar-ph'):el.getAttribute('data-en-
 $('#cursorLabel').textContent=(l==='ar'?'شوف':'VIEW');
 renderProjects(currentFilter);
 renderServices();
+syncStoryMusicButton();
 }
 $('#btnAr').onclick=()=>applyLang('ar');
 $('#btnEn').onclick=()=>applyLang('en');
+
+const storyMusic=$('#storyMusic'),storyMusicBtn=$('#storyMusicBtn');
+storyMusic.volume=.24;
+function syncStoryMusicButton(){
+const playing=!storyMusic.paused;
+const label=playing?(LANG==='ar'?'أوقف الموسيقى':'Pause music'):(LANG==='ar'?'شغل الموسيقى':'Play music');
+storyMusicBtn.classList.toggle('playing',playing);
+storyMusicBtn.setAttribute('aria-pressed',String(playing));
+storyMusicBtn.setAttribute('aria-label',label);
+$('#storyMusicLabel').textContent=label;
+}
+storyMusicBtn.addEventListener('click',async()=>{
+if(storyMusic.paused){
+try{await storyMusic.play();}
+catch{toast(LANG==='ar'?'تعذر تشغيل الموسيقى':'Unable to play the music');}
+}else storyMusic.pause();
+syncStoryMusicButton();
+});
+storyMusic.addEventListener('play',syncStoryMusicButton);
+storyMusic.addEventListener('pause',syncStoryMusicButton);
+window.addEventListener('scroll',()=>{
+if($('#work').getBoundingClientRect().top<innerHeight)storyMusic.pause();
+},{passive:true});
 
 /* ============ NAV / MENU ============ */
 const nav=$('#nav'), menuBtn=$('#menuBtn'), menu=$('#menu');
