@@ -173,6 +173,35 @@ html[dir="ltr"] .card-top{flex-direction:row}
 .arrow{width:52px;height:52px;flex-shrink:0;border-radius:50%;border:1px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:20px;transition:.4s var(--ease);background:rgba(255,255,255,.08);backdrop-filter:blur(8px)}
 .card:hover .arrow{background:#fff;color:#000;transform:rotate(-45deg)}
 html[dir="rtl"] .card:hover .arrow{transform:rotate(45deg)}
+/* testimonials */
+.testimonials{padding:64px 20px 72px;background:var(--paper2);color:#0B0B0B}
+.testimonials-wrap{max-width:1240px;margin:0 auto}
+.testimonials-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:24px}
+.testimonials-head h2{font-size:clamp(30px,6vw,54px);line-height:1.2;margin-top:14px}
+.testimonials-note{max-width:440px;color:var(--muted-b);font-size:13px}
+.testimonial-grid{display:grid;gap:12px}
+@media(min-width:760px){.testimonial-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.testimonial-card{min-width:0;padding:22px;border:1px solid rgba(0,0,0,.12);border-radius:16px;background:#fff;display:flex;flex-direction:column;min-height:230px}
+.testimonial-rating{font-family:'Space Grotesk';font-size:13px;font-weight:700;color:#8A6B2E}
+.testimonial-rating span{color:#151515;margin-inline-start:8px}
+.testimonial-card blockquote{margin:20px 0 24px;font-size:16px;line-height:1.9;flex:1}
+.testimonial-source{padding-top:13px;border-top:1px solid rgba(0,0,0,.1);color:var(--muted-b);font-size:12px;font-weight:600}
+.review-form{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px;padding:20px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:16px}
+@media(min-width:760px){.review-form{grid-template-columns:1fr 1fr;padding:24px}}
+.review-field label,.review-rating legend{display:block;margin-bottom:8px;font-size:13px;font-weight:700}
+.review-field input,.review-field textarea{width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,.16);border-radius:10px;background:#fff;color:#0B0B0B;font:inherit;outline:none}
+.review-field input:focus,.review-field textarea:focus{border-color:#8A6B2E;box-shadow:0 0 0 3px rgba(138,107,46,.12)}
+.review-field textarea{min-height:110px;resize:vertical}
+.review-field-full{grid-column:1/-1}
+.review-rating{min-width:0;border:0;padding:0;margin:0}
+.rating-options{display:flex;gap:12px;direction:ltr}
+.rating-options label{display:flex;align-items:center;gap:4px;cursor:pointer}
+.rating-options input{accent-color:#8A6B2E}
+.rating-options span{color:#8A6B2E;font-size:19px}
+.rating-options small{font-size:12px;color:var(--muted-b)}
+.review-submit{width:100%;padding:14px 18px;border:0;border-radius:10px;background:#0B0B0B;color:#fff;font:700 14px inherit;cursor:pointer}
+.review-submit:hover{background:#28231a}
+.review-note{margin-top:8px;color:var(--muted-b);font-size:12px;line-height:1.7}
 /* marquee */
 .marquee{background:#0B0B0B;color:var(--paper);padding:16px 0;overflow:hidden;white-space:nowrap;border-top:1px solid #222;border-bottom:1px solid #222}
 .marquee-track{display:inline-flex;gap:0;animation:mq 22s linear infinite}
@@ -263,7 +292,7 @@ footer{margin-top:50px;border-top:1px solid var(--line-w);padding:28px 20px 90px
 .sheet-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55))}
 .sheet-videos{display:grid;gap:16px;margin-top:18px}
 .sheet-video{margin:0}
-.sheet-video video{display:block;width:100%;max-height:60svh;background:#080808;border-radius:14px}
+.sheet-video video,.sheet-video iframe{display:block;width:100%;aspect-ratio:16/9;max-height:60svh;background:#080808;border:0;border-radius:14px}
 .sheet-video figcaption{margin-top:7px;font-size:12px;color:var(--muted-b)}
 .sheet-gallery{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
 @media(min-width:700px){.sheet-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -342,7 +371,7 @@ html[dir="ltr"] .sheet-close{left:auto;right:14px}
 
 <main id="top">
 <div class="story-wrap" id="story">
-<audio id="storyMusic" src="assets/music/story.mp3" preload="none" loop></audio>
+<audio id="storyMusic" src="assets/music/story.mp3" preload="auto" loop></audio>
 <div class="glow" style="top:5%;right:-10%"></div>
 <div class="glow" style="top:55%;left:-15%;opacity:.1"></div>
 
@@ -425,6 +454,33 @@ html[dir="ltr"] .sheet-close{left:auto;right:14px}
 <button class="f-btn" data-f="campaign" data-ar="كامبين" data-en="Campaigns">كامبين</button>
 </div>
 <div class="grid" id="grid"></div>
+
+<section class="testimonials" id="testimonials">
+<div class="testimonials-wrap">
+<div class="testimonials-head">
+<div><span class="eyebrow" data-ar="آراء العملاء" data-en="CLIENT REVIEWS">آراء العملاء</span>
+<h2 data-ar="تجارب تستاهل تتحكي" data-en="Good work gets talked about">تجارب تستاهل تتحكي</h2></div>
+<p class="testimonials-note" data-ar="نماذج تجريبية للعرض فقط وليست تقييمات حقيقية. استبدلها بآراء عملائك قبل النشر." data-en="Demo copy for layout preview only, not real client reviews. Replace it with genuine testimonials before publishing.">نماذج تجريبية للعرض فقط وليست تقييمات حقيقية. استبدلها بآراء عملائك قبل النشر.</p>
+</div>
+<div class="testimonial-grid">
+<article class="testimonial-card"><div class="testimonial-rating" data-ar="★★★★★ 5 من 5" data-en="★★★★★ 5 out of 5">★★★★★ 5 من 5</div><blockquote data-ar="فهموا إحنا عايزين نوصل لإيه، وطلعوا لنا هوية شبهنا فعلًا. التعامل كان واضح من أول خطوة." data-en="They understood what we wanted to communicate and shaped an identity that felt true to us. The process was clear from day one.">فهموا إحنا عايزين نوصل لإيه، وطلعوا لنا هوية شبهنا فعلًا. التعامل كان واضح من أول خطوة.</blockquote><div class="testimonial-source" data-ar="مروان حسن | نموذج تجريبي" data-en="Marwan Hassan | Demo">مروان حسن | نموذج تجريبي</div></article>
+<article class="testimonial-card"><div class="testimonial-rating" data-ar="★★★★★ 5 من 5" data-en="★★★★★ 5 out of 5">★★★★★ 5 من 5</div><blockquote data-ar="الفيديوهات اتعملت بروح البراند، والتعديلات كانت سريعة لحد ما وصلنا للشكل الصح." data-en="The videos captured the brand's character, and revisions were quick until we got the right result.">الفيديوهات اتعملت بروح البراند، والتعديلات كانت سريعة لحد ما وصلنا للشكل الصح.</blockquote><div class="testimonial-source" data-ar="سارة محمود | نموذج تجريبي" data-en="Sara Mahmoud | Demo">سارة محمود | نموذج تجريبي</div></article>
+<article class="testimonial-card"><div class="testimonial-rating" data-ar="★★★★★ 5 من 5" data-en="★★★★★ 5 out of 5">★★★★★ 5 من 5</div><blockquote data-ar="المحتوى بقى مرتب وسهل ننشره، والتواصل كان مريح طول فترة الشغل." data-en="The content was organized and easy to publish, and communication stayed smooth throughout the project.">المحتوى بقى مرتب وسهل ننشره، والتواصل كان مريح طول فترة الشغل.</blockquote><div class="testimonial-source" data-ar="أحمد علي | نموذج تجريبي" data-en="Ahmed Ali | Demo">أحمد علي | نموذج تجريبي</div></article>
+</div>
+<form class="review-form" id="reviewForm">
+<div class="review-field"><label for="reviewName" data-ar="اسمك" data-en="Your name">اسمك</label><input id="reviewName" name="reviewName" type="text" maxlength="60" autocomplete="name" required></div>
+<fieldset class="review-rating"><legend data-ar="تقييمك" data-en="Your rating">تقييمك</legend><div class="rating-options" dir="ltr">
+<label><input type="radio" name="reviewRating" value="1" required><span aria-hidden="true">★</span><small>1</small></label>
+<label><input type="radio" name="reviewRating" value="2"><span aria-hidden="true">★</span><small>2</small></label>
+<label><input type="radio" name="reviewRating" value="3"><span aria-hidden="true">★</span><small>3</small></label>
+<label><input type="radio" name="reviewRating" value="4"><span aria-hidden="true">★</span><small>4</small></label>
+<label><input type="radio" name="reviewRating" value="5"><span aria-hidden="true">★</span><small>5</small></label>
+</div></fieldset>
+<div class="review-field review-field-full"><label for="reviewComment" data-ar="اكتب تعليقك" data-en="Your comment">اكتب تعليقك</label><textarea id="reviewComment" name="reviewComment" maxlength="600" required></textarea></div>
+<div class="review-field-full"><button class="review-submit" type="submit" data-ar="ابعت تقييمك على واتساب ↗" data-en="Send your review on WhatsApp ↗">ابعت تقييمك على واتساب ↗</button><p class="review-note" data-ar="هيتفتح واتساب برسالتك لمراجعتها. مش هيتنشر التقييم تلقائيًا." data-en="WhatsApp will open with your review for moderation. Reviews are not published automatically.">هيتفتح واتساب برسالتك لمراجعتها. مش هيتنشر التقييم تلقائيًا.</p></div>
+</form>
+</div>
+</section>
 
 <div class="marquee"><div class="marquee-track" id="mqTrack">
 <span>ORIGIN STORY WORK MEDIA CONTENT BRANDING </span><span>ORIGIN STORY WORK MEDIA CONTENT BRANDING </span><span>ORIGIN STORY WORK MEDIA CONTENT BRANDING </span><span>ORIGIN STORY WORK MEDIA CONTENT BRANDING </span>
@@ -553,7 +609,7 @@ $('#btnAr').onclick=()=>applyLang('ar');
 $('#btnEn').onclick=()=>applyLang('en');
 
 const storyMusic=$('#storyMusic'),storyMusicBtn=$('#storyMusicBtn');
-storyMusic.volume=.24;
+storyMusic.volume=.5;
 function syncStoryMusicButton(){
 const playing=!storyMusic.paused;
 const label=playing?(LANG==='ar'?'أوقف الموسيقى':'Pause music'):(LANG==='ar'?'شغل الموسيقى':'Play music');
@@ -618,49 +674,49 @@ const PROJECTS=[
 title_ar:'سانتا كافية',title_en:'Santa Kafiya',
 cat_ar:'براندنج',cat_en:'Branding',
 desc_ar:'هوية بصرية متكاملة وتصميمات هتخلّي العلامة تظهر بقوة في السوشيال ميديا وتدعم تجربة المنتج.',desc_en:'A complete visual identity and design system that gives the brand a strong presence across social media and product experience.',
-folder:'Santa Kafiya',cover:'logo.jpg',gallery:[],videos:['rrrr.mp4'],
+folder:'Santa Kafiya',cover:'logo.jpg',gallery:[],videos:['rrrr.mp4'],driveVideos:[{file:'rrrr.mp4',id:'1gSFKCmGw_S1L4YJI9jsQw26B7onHQLN1'}],
 views:'Brand',items:'Identity',res:'Launch'},
 {id:2,cat:'social',type:'◎',feat:false,img:'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1000&auto=format&fit=crop',
 title_ar:'كبابجي المصطفي',title_en:'Kabaji Al-Mustafa',
 cat_ar:'سوشيال ميديا',cat_en:'Social Media',
 desc_ar:'محتوى بصري عملي ومميز يبرز المنتج ويخلي التجربة والهوية أقرب للجمهور.',desc_en:'A refined social content system that highlights the product and brings the brand experience closer to the audience.',
-folder:'Kabaji Al-Mustafa',cover:'logo.jpg',gallery:['ee.png','Untitled-1.png'],videos:['2121.mp4','22.mp4','Sequence 01.mp4','Sequence 01_1.mp4','Sequence 01_2.mp4','Sequence 01_8.mp4','Sequence 01_17.mp4'],
+folder:'Kabaji Al-Mustafa',cover:'logo.jpg',gallery:['ee.png','Untitled-1.png'],videos:['2121.mp4','22.mp4','Sequence 01.mp4','Sequence 01_1.mp4','Sequence 01_2.mp4','Sequence 01_8.mp4','Sequence 01_17.mp4'],driveVideos:[{file:'2121.mp4',id:'1yBqq7mldv1m1AATqycdUwKs8ml7sw5K0'},{file:'22.mp4',id:'1swjRGpBbF8b5xMVUTsxj49Tb2qm7RIdb'},{file:'Sequence 01.mp4',id:'1p2eM6BeL22lmEDVxQD8xSOmE_ubfjK-R'},{file:'Sequence 01_1.mp4',id:'1HSwXhHpKO0dKCiV60K6hjLrr9BVr7tAz'},{file:'Sequence 01_2.mp4',id:'1vwa6LHgmBtLwtM1hn3MuU8pX9eUO4IO-'},{file:'Sequence 01_8.mp4',id:'1M5Us4ClFelFGYop-vDypsd8bkd1B-gLZ'},{file:'Sequence 01_17.mp4',id:'1t8Uw3Gm4MR4NxR79-qEMw5MogAfI1Itw'}],
 views:'Social',items:'Content',res:'Growth'},
 {id:3,cat:'video',type:'▶',feat:false,img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop',
 title_ar:'خطوة جروب',title_en:'Khatwa Group',
 cat_ar:'فيديو',cat_en:'Video',
 desc_ar:'فيديوهات وتخطيط محتوى يبين مدى احترافية المجموعة ويضيف قيمة بصرية لعلامتهم.',desc_en:'Video and content direction that reflects the professionalism of the group and adds a premium visual value to the brand.',
-folder:'Khatwa Group',cover:'logo.jpg',gallery:['عقاري.png','عقاري 2.png','عقاري 3.png','عقاري 4.png','عقاري 6.png'],videos:['MOLL.mp4','نهائي.mp4'],
+folder:'Khatwa Group',cover:'logo.jpg',gallery:['عقاري.png','عقاري 2.png','عقاري 3.png','عقاري 4.png','عقاري 6.png'],videos:['MOLL.mp4','نهائي.mp4'],driveVideos:[{file:'MOLL.mp4',id:'1jQlJJxcQd7TVvpFWYs7VIcfZpZPTyFXl'},{file:'نهائي.mp4',id:'1x3UBs_3vHMsuqX3VALkqyC3GrI7RPhR0'}],
 views:'Video',items:'Campaign',res:'Impact'},
 {id:4,cat:'branding',type:'✦',feat:false,img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop',
 title_ar:'Joy of Nature',title_en:'Joy of Nature',
 cat_ar:'تصميمات',cat_en:'Designs',
 desc_ar:'تصاميم بصرية لطبيعة المتجر والهوية مع عناصر مريحة ومنتجة للمتابعة.',desc_en:'Visual designs inspired by nature and a soft premium identity tailored for a memorable brand experience.',
-folder:'Joy of Nature',cover:'logo.jfif',gallery:[],videos:['HAVAS - Video 1.mp4'],
+folder:'Joy of Nature',cover:'logo.jfif',gallery:[],videos:['HAVAS - Video 1.mp4'],driveVideos:[{file:'HAVAS - Video 1.mp4',id:'1WHVeFvNhtJiGS7Gr7ZYINOpVvFzmfuYk'}],
 views:'Design',items:'Visuals',res:'Art'},
 {id:5,cat:'branding',type:'◈',feat:false,img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1000&auto=format&fit=crop',
 title_ar:'Meraki',title_en:'Meraki',
 cat_ar:'براندنج',cat_en:'Branding',
 desc_ar:'هوية بصرية للقرية السياحية في شرم الشيخ مع طابع طبيعي وجمالي يعكس التجربة السياحية والجو المميز.',desc_en:'A destination brand identity for a tourism village in Sharm El Sheikh with a natural and elegant visual language that reflects the atmosphere and experience.',
-folder:'Meraki',cover:'logo.jpg',gallery:[],videos:['Meraki - Sharm Elsheikh-.mp4'],
+folder:'Meraki',cover:'logo.jpg',gallery:[],videos:['Meraki - Sharm Elsheikh-.mp4'],driveVideos:[{file:'Meraki - Sharm Elsheikh-.mp4',id:'1JAqzZuqw0RX4CGsW0K--k-2zyffv8dpi'}],
 views:'Village',items:'Identity',res:'Tourism'},
 {id:6,cat:'branding',type:'◈',feat:false,img:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1000&auto=format&fit=crop',
 title_ar:'Schon Aesthetic Clinics',title_en:'Schon Aesthetic Clinics',
 cat_ar:'براندنج',cat_en:'Branding',
 desc_ar:'هوية بصرية أنيقة للعيادة مع تركيز على الجمال، الثقة، والتجربة المميزة للمرضى.',desc_en:'A refined clinic identity focused on beauty, trust, and a premium patient experience.',
-folder:'Schon Aesthetic Clinics',cover:'logo.png',gallery:[],videos:['Shon.mp4','Schon stories.mp4'],
+folder:'Schon Aesthetic Clinics',cover:'logo.png',gallery:[],videos:['Shon.mp4','Schon stories.mp4'],driveVideos:[{file:'Shon.mp4',id:'14hASKTttkqn7_QNaROQ_pXCeB9Fjeigl'},{file:'Schon stories.mp4',id:'13NXWBv9yHMGxUBx1vF5MDPhMTyFQBoI_'}],
 views:'Clinic',items:'Brand',res:'Aesthetic'},
 {id:7,cat:'branding',type:'✦',feat:false,img:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000&auto=format&fit=crop',
 title_ar:'نايت كايرو زوم',title_en:'Night Cairo Zoom',
 cat_ar:'براندنج',cat_en:'Branding',
 desc_ar:'هوية بصرية فاخرة ومرنة تعكس طابع الليلة، الحركة، والثقة في صورة علامة حديثة ومميزة.',desc_en:'A premium, flexible visual identity that reflects nightlife energy, motion, and confidence in a modern, memorable brand presence.',
-folder:'Night Cairo Zoom',cover:'logo.png',gallery:[],videos:['Cairo zoom.mp4'],
+folder:'Night Cairo Zoom',cover:'logo.png',gallery:[],videos:['Cairo zoom.mp4'],driveVideos:[{file:'Cairo zoom.mp4',id:'1IkiaPEqPmAgjXItps9xLj4oU7hxbnb6t'}],
 views:'Brand',items:'Identity',res:'Launch'},
 {id:8,cat:'branding',type:'✦',feat:false,img:'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
 title_ar:'Police',title_en:'Police',
 cat_ar:'براندنج',cat_en:'Branding',
 desc_ar:'هوية بصرية قوية ومميزة تعكس الصورة الرسمية والاحترافية للعلامة.',desc_en:'A strong and polished brand identity that reflects the official, confident, and professional image of the label.',
-folder:'Police',cover:'logo.png',gallery:[],videos:['Police _4.mp4','Police _2.mp4','Police _1.mp4'],
+folder:'Police',cover:'logo.png',gallery:[],videos:['Police _4.mp4','Police _2.mp4','Police _1.mp4'],driveVideos:[{file:'Police _4.mp4',id:'1z6wjhNB40e4GD0Qepoj37fEM47_hhqP5'},{file:'Police _2.mp4',id:'16llzbwIkmEDyRkngEsTWUW2t-rZDMZLg'},{file:'Police _1.mp4',id:'1iZmpIGw16MkX7_nEFUssloHNoDkR7Qv2'}],
 views:'Brand',items:'Identity',res:'Luxury'},
 {id:9,cat:'social',type:'✦',feat:false,img:'https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop',
 title_ar:'CAAVERL Seafood',title_en:'CAAVERL Seafood',
@@ -760,7 +816,14 @@ modalImage.onerror=()=>{modalImage.onerror=null;modalImage.src=p.img;};
 modalImage.src=`assets/projects/${encodeURIComponent(p.folder)}/${encodeURIComponent(p.cover)}`;
 const videoBox=$('#mVideos');
 videoBox.innerHTML='';
-if(p.videos?.length){
+if(p.driveVideos?.length){
+videoBox.innerHTML=p.driveVideos.map(video=>{
+const preview=`https://drive.google.com/file/d/${video.id}/preview`;
+const open=`https://drive.google.com/file/d/${video.id}/view`;
+const label=video.file.replace(/\.mp4$/i,'');
+return `<figure class="sheet-video"><iframe loading="lazy" src="${preview}" title="${video.file}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><figcaption><a href="${open}" target="_blank" rel="noopener noreferrer">${label} ↗</a></figcaption></figure>`;
+}).join('');
+}else if(p.videos?.length){
 videoBox.innerHTML=p.videos.map(file=>{
 const src=`assets/projects/${encodeURIComponent(p.folder)}/${encodeURIComponent(file)}`;
 const label=file.replace(/\.mp4$/i,'');
@@ -809,6 +872,17 @@ const message=LANG==='ar'
 const whatsappUrl=`https://wa.me/201019646190?text=${encodeURIComponent(message)}`;
 window.open(whatsappUrl,'_blank','noopener,noreferrer');
 toast(LANG==='ar'?'فتحنا واتساب برسالتك الجاهزة':'WhatsApp opened with your message');
+});
+$('#reviewForm').addEventListener('submit',e=>{
+e.preventDefault();
+const form=e.currentTarget;
+if(!form.reportValidity())return;
+const name=$('#reviewName').value.trim(),rating=form.elements.reviewRating.value,comment=$('#reviewComment').value.trim();
+const message=LANG==='ar'
+?`تقييم جديد لموقع ORIGIN\nالاسم: ${name}\nالتقييم: ${rating}/5\nالتعليق: ${comment}`
+:`New ORIGIN website review\nName: ${name}\nRating: ${rating}/5\nComment: ${comment}`;
+window.open(`https://wa.me/201019646190?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
+toast(LANG==='ar'?'فتحنا واتساب لإرسال تقييمك':'WhatsApp opened to send your review');
 });
 
 /* active nav */
